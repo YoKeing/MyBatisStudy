@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.EmployeeMapperDynamicSQL">
+
+    <select id="getEmpsByConditionIf" resultType="employee">
+        select * from tbl_employee
+        where 1 = 1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="lastName != null &amp;&amp; lastName != &quot;&quot;">
+            and last_name like #{lastName}
+        </if>
+        <if test="email != null and email.trim() != &quot;&quot;">
+            and email = #{email}
+        </if>
+        <if test="gender == 0 or gender == 1">
+            and gender = #{gender}
+        </if>
+
+    </select>
+
+    <select id="getEmpsByConditionTrim" resultType="employee">
+        select * from tbl_employee
+        <trim prefix="where" suffixOverrides="add">
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="lastName != null &amp;&amp; lastName != &quot;&quot;">
+                and last_name like #{lastName}
+            </if>
+            <if test="email != null and email.trim() != &quot;&quot;">
+                and email = #{email}
+            </if>
+            <if test="gender == 0 or gender == 1">
+                and gender = #{gender}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getEmpsByConditionChoose" resultType="employee">
+        select * from tbl_employee
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <when test="lastName != null">
+                    last_name like #{lastName}
+                </when>
+                <when test="email != null">
+                    email = #{email}
+                </when>
+                <otherwise>
+                    gender = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updateEmp">
+<!--        update tbl_employee-->
+<!--        <set>-->
+<!--            <if test="lastName != null">-->
+<!--                last_name = #{lastName},-->
+<!--            </if>-->
+<!--            <if test="email != null">-->
+<!--                email = #{email},-->
+<!--            </if>-->
+<!--            <if test="gender != null">-->
+<!--                gender = #{gender}-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{id}-->
+
+        update tbl_employee
+        <trim prefix="set" suffixOverrides=",">
+            <if test="lastName != null">
+                last_name = #{lastName},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="gender != null">
+                gender = #{gender}
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <select id="getEmpsByConditionForeach" resultType="employee">
+        select  * from tbl_employee where id in
+
+        <foreach collection="list" item="item_id" separator="," open="(" close=")" >
+            #{item_id}
+        </foreach>
+    </select>
+
+<!--    <insert id="addEmps">-->
+
+<!--        insert into tbl_employee(last_name, email, gender, d_id)-->
+<!--        values-->
+<!--        <foreach collection="emps" item="emp" separator=",">-->
+<!--            (#{emp.lastName}, #{emp.email}, #{emp.gender}, #{emp.department.id})-->
+<!--        </foreach>-->
+
+<!--    </insert>-->
+
+    <insert id="addEmps">
+        <foreach collection="emps" item="emp" separator=";">
+                insert into tbl_employee(last_name, email, gender, d_id)
+                values(#{emp.lastName}, #{emp.email}, #{emp.gender}, #{emp.department.id})
+        </foreach>
+    </insert>
+
+    <select id="getEmpsTestInnerParamenter" resultType="employee">
+        
+        <bind name="_lastName" value="'_' + lastName + '%'"/>
+
+        <if test="_databaseId == 'mysql'">
+            select * from tbl_employee
+            <if test="_parameter != null">
+                where last_name like #{_lastName}
+            </if>
+        </if>
+        <if test="_databaseId == 'oracle'">
+            select * from employees
+            <if test="_parameter != null">
+                where last_name like #{_parameter.lastName}
+            </if>
+        </if>
+    </select>
+
+
+    <sql id="insertColumn">
+        <if test="">
+
+        </if>
+        employee_id, last_name, email
+    </sql>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

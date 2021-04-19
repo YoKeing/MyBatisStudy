@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MyBatis_01_HelloWorld.iml" filepath="$PROJECT_DIR$/MyBatis_01_HelloWorld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyBatis_02_config/MyBatis_02_config.iml" filepath="$PROJECT_DIR$/../MyBatis_02_config/MyBatis_02_config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyBatis_03_mapper/MyBatis_03_mapper.iml" filepath="$PROJECT_DIR$/../MyBatis_03_mapper/MyBatis_03_mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyBatis_04_DynamicSQL/MyBatis_04_DynamicSQL.iml" filepath="$PROJECT_DIR$/../MyBatis_04_DynamicSQL/MyBatis_04_DynamicSQL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyBatis_05_cache/MyBatis_05_cache.iml" filepath="$PROJECT_DIR$/../MyBatis_05_cache/MyBatis_05_cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyBatis_06_ssm.iml" filepath="$PROJECT_DIR$/../MyBatis_06_ssm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyBatis_11_other/MyBatis_11_other.iml" filepath="$PROJECT_DIR$/../MyBatis_11_other/MyBatis_11_other.iml" />
+    </modules>
+  </component>
+</project>
